@@ -1,4 +1,4 @@
- // 10727127 ªô¨ÎÂ@ 10727157 ¤òµbÜr
+ // 10727127 é‚±ä½³é§¿ 10727157 æ¯›ç¨éˆœ
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
@@ -11,7 +11,7 @@ using namespace std ;
 FILE *infile = NULL ;
 clock_t start_time, end_time ;
 int ReadingTime, SortingTime, WritingTime ;
-int CPU_time = 1 ; // ²Ä´X­Ó®É¶¡ÂI 
+int CPU_time = 1 ; // ç¬¬å¹¾å€‹æ™‚é–“é» 
 int JobItem = 0 ;
 class Job{
 	public :
@@ -42,7 +42,7 @@ class CPU {
 	public:
 		vector<Abort> Abort_Jobs ;
 		vector<Done> Done_Jobs ;
-		vector<Job> Q_Jobs ; // ¥u¯à¦s4­ÓJob 
+		vector<Job> Q_Jobs ; // åªèƒ½å­˜4å€‹Job 
 	void Joblist_to_CPU() {
 		Q_Jobs.push_back( Job_list[JobItem] ) ;
 	} // Joblist_to_CPU()
@@ -52,8 +52,8 @@ class CPU {
 			Abort_temp.OID = Q_Jobs[4].OID ;
 			Abort_temp.Abort = CPU_time ;
 			Abort_temp.Delay = 0 ;
-			Abort_Jobs.push_back( Abort_temp ) ;  // ¥[¤JAbort 
-			Q_Jobs.erase( Q_Jobs.begin() + 4 ) ; // §R°£Q 
+			Abort_Jobs.push_back( Abort_temp ) ;  // åŠ å…¥Abort 
+			Q_Jobs.erase( Q_Jobs.begin() + 4 ) ; // åˆªé™¤Q 
 		} // while	
 	} // Q_fullOut()
 	
@@ -61,7 +61,7 @@ class CPU {
 		Abort_temp.OID = Q_Jobs[0].OID ;
 		Abort_temp.Abort = CPU_time ;
 		Abort_temp.Delay = Abort_temp.Abort - Q_Jobs[0].Arrival ;
-		Abort_Jobs.push_back( Abort_temp ) ;  // ¥[¤JAbort 
+		Abort_Jobs.push_back( Abort_temp ) ;  // åŠ å…¥Abort 
 		Q_Jobs.erase( Q_Jobs.begin() ) ;
 	} // Execute_Abort()
 	
@@ -91,7 +91,7 @@ class CPU {
 		infile = fopen( fileName.c_str(), "w+b" ) ; 
 		string s = "[Abort Jobs]" ;
 		cout << '\t' << s << endl  ;
-		fprintf(infile, "%c%s%c", '\t', s.c_str(), '\n') ;  // ÂàC¦r¦ê¦s
+		fprintf(infile, "%c%s%c", '\t', s.c_str(), '\n') ;  // è½‰Cå­—ä¸²å­˜
 		string a =  "OID"    ;
 		string b = "Abort"   ;
 		string c = "Delay" ;
@@ -104,7 +104,7 @@ class CPU {
 		
 		s = "[Jobs Done]" ;
 		cout << '\t' << s << endl ;
-		fprintf(infile, "%c%s%c", '\t', s.c_str(),'\n' ) ;  // ÂàC¦r¦ê¦s
+		fprintf(infile, "%c%s%c", '\t', s.c_str(),'\n' ) ;  // è½‰Cå­—ä¸²å­˜
 		b = "Departure" ;
 		cout <<'\t' << a << '\t' << b << '\t' << c << endl ;
 		fprintf(infile, "%c%s%c%s%c%s%c",'\t', a.c_str(), '\t',b.c_str(), '\t',c.c_str(), '\n' ) ;
@@ -126,9 +126,9 @@ class CPU {
 }; // CPU
 
 void PrintCommand() {
-	cout << "*" << " 0. Â÷¶}" << endl << "*" <<
-    " 1. «ü©w¤è¦¡¥t«Ø±Æ§ÇÀÉ" << endl << "*" << " 2. ³æ¤@CPU§Ç¦C¼ÒÀÀ" << endl <<
-    "½Ğ¿é¤J«ü¥O( 0, 1, 2 ):" ; 
+	cout << "*" << " 0. é›¢é–‹" << endl << "*" <<
+    " 1. æŒ‡å®šæ–¹å¼å¦å»ºæ’åºæª”" << endl << "*" << " 2. å–®ä¸€CPUåºåˆ—æ¨¡æ“¬" << endl <<
+    "è«‹è¼¸å…¥æŒ‡ä»¤( 0, 1, 2 ):" ; 
 } // PrintCommand
 
 bool IsDigit( string input ) {
@@ -136,7 +136,7 @@ bool IsDigit( string input ) {
     	if ( !isdigit( input[i] ) )
    			return false ;
 	return true ;
-    // ¿é¤JªºªF¦è¥u¦³¯Â¼Æ¦rªºª¬ªp¤~±µ¨ü 
+    // è¼¸å…¥çš„æ±è¥¿åªæœ‰ç´”æ•¸å­—çš„ç‹€æ³æ‰æ¥å— 
 } // IsDigit() 
 
 bool Load( string fileName) {  // load file        
@@ -163,7 +163,7 @@ string StoreFile() {
 	s = s + '\n' ;
 	while ( fscanf( infile, "%d%d%d%d", &temp.OID, &temp.Arrival, &temp.Duration, &temp.TimeOut ) != EOF ) 
 		Job_list.push_back(temp) ;
-	// Åª§¹ÃöÀÉ 
+	// è®€å®Œé—œæª” 
 	
 	fclose(infile) ;
 	ReadingTime = clock() - start_time ;
@@ -199,7 +199,7 @@ void SortNewFile( string fileName, string s ) {
 	start_time = clock() ;
 	fileName = "sorted" + fileName + ".txt" ; 
 	infile = fopen( fileName.c_str(), "w+b" ) ; 
-	fprintf(infile, "%s", s.c_str()) ;  // ÂàC¦r¦ê¦s
+	fprintf(infile, "%s", s.c_str()) ;  // è½‰Cå­—ä¸²å­˜
 	cout << s  ;
 	
 	for ( int i = 0 ; i < Job_list.size() ; i ++ ) {
@@ -217,12 +217,12 @@ void PrintTime() {
 	cout << "Writing data: " << WritingTime << " ms" << endl ;
 } // PrintTime()
 int main() {
-	string com = "" ; // ±µ¦¬«ü¥O  
+	string com = "" ; // æ¥æ”¶æŒ‡ä»¤  
  	while ( 1 ) {                            
 		PrintCommand() ;
       	cin >> com ;
-   		while ( !IsDigit( com ) || atoi( com.c_str() ) < 0 || atoi( com.c_str() ) > 2 ) { // ±Æ±¼©_©Ç¼Æ¦r 
-    		cout << "«ü¥O¤£¦s¦b,½Ğ­«·s¿é¤J: " ;
+   		while ( !IsDigit( com ) || atoi( com.c_str() ) < 0 || atoi( com.c_str() ) > 2 ) { // æ’æ‰å¥‡æ€ªæ•¸å­— 
+    		cout << "æŒ‡ä»¤ä¸å­˜åœ¨,è«‹é‡æ–°è¼¸å…¥: " ;
     		cout << endl ; 
        		PrintCommand() ;
        		cin >> com ;
@@ -231,12 +231,12 @@ int main() {
       	if ( com.compare( "0" ) == 0 )
         	exit(0) ;
       	if ( com == "1" ) {
-      		string s ; // ¥Î¨Ó¦s¼ĞÃD 
-      		cout << "¿é¤J­n°õ¦æªºÀÉ®× :" ; 
+      		string s ; // ç”¨ä¾†å­˜æ¨™é¡Œ 
+      		cout << "è¼¸å…¥è¦åŸ·è¡Œçš„æª”æ¡ˆ :" ; 
       		string fileName ;
       		cin >> fileName ;
-			while ( !Load(fileName) ) { // Åª¨ì¦³ÀÉ®×¬°¤î 
-				cout << "¿é¤J­n°õ¦æªºÀÉ®× :" ;
+			while ( !Load(fileName) ) { // è®€åˆ°æœ‰æª”æ¡ˆç‚ºæ­¢ 
+				cout << "è¼¸å…¥è¦åŸ·è¡Œçš„æª”æ¡ˆ :" ;
 				cin >> fileName ;
 			} // while
 			
@@ -247,41 +247,41 @@ int main() {
 		} // if 
 		
 		else if ( com == "2" ) {
-			cout << "¿é¤J­n°õ¦æªºÀÉ®× :" ;
+			cout << "è¼¸å…¥è¦åŸ·è¡Œçš„æª”æ¡ˆ :" ;
 			string fileName ;
 			cin >> fileName ;
-			while ( !Load(fileName) ) { // Åª¨ì¦³ÀÉ®×¬°¤î 
-				cout << "¿é¤J­n°õ¦æªºÀÉ®× :" ;
+			while ( !Load(fileName) ) { // è®€åˆ°æœ‰æª”æ¡ˆç‚ºæ­¢ 
+				cout << "è¼¸å…¥è¦åŸ·è¡Œçš„æª”æ¡ˆ :" ;
 				cin >> fileName ;
 			} // while
 			
 			StoreFile() ;
 			ShellSort( Job_list.size() ) ;
 			CPU cpu ;
-			while ( (JobItem < Job_list.size()  ) || !cpu.Q_Jobs.empty() ) { // JobListÁÙ¨S¶]§¹¥BCPUÁÙ¦³Job
-				if ( !cpu.Q_Jobs.empty() ) { // cpu¦³ªF¦è  
-					if ( cpu.Q_Jobs[0].Duration + cpu.Q_Jobs[0].CPU_doing_time == CPU_time ) // ´£«e°µ§¹ 
+			while ( (JobItem < Job_list.size()  ) || !cpu.Q_Jobs.empty() ) { // JobListé‚„æ²’è·‘å®Œä¸”CPUé‚„æœ‰Job
+				if ( !cpu.Q_Jobs.empty() ) { // cpuæœ‰æ±è¥¿  
+					if ( cpu.Q_Jobs[0].Duration + cpu.Q_Jobs[0].CPU_doing_time == CPU_time ) // æå‰åšå®Œ 
 						cpu.Done() ;
 					else if ( cpu.Q_Jobs[0].TimeOut == CPU_time && cpu.Q_Jobs[0].Duration + cpu.Q_Jobs[0].CPU_doing_time > cpu.Q_Jobs[0].TimeOut ) 
 						cpu.Execute_Abort() ;
 					else if ( cpu.Q_Jobs[0].TimeOut == CPU_time && cpu.Q_Jobs[0].Duration + cpu.Q_Jobs[0].CPU_doing_time == cpu.Q_Jobs[0].TimeOut ) 
-						cpu.Done() ; // ­è¦n°µ§¹ 
-					// §PÂ_¦î¦C­n¶i¤JCPU®Éªº¤u§@ª¬ºA¡A¤w¸g¹O®É©Î­è¦n¹O®É 
+						cpu.Done() ; // å‰›å¥½åšå®Œ 
+					// åˆ¤æ–·ä½‡åˆ—è¦é€²å…¥CPUæ™‚çš„å·¥ä½œç‹€æ…‹ï¼Œå·²ç¶“é€¾æ™‚æˆ–å‰›å¥½é€¾æ™‚ 
 					while ( !cpu.Q_Jobs.empty() && cpu.Q_Jobs[0].CPU_doing_time == 0 && cpu.Q_Jobs[0].TimeOut <= CPU_time  )
 						cpu.Execute_Abort() ;
 				} // if 
 				
-				if ( JobItem < Job_list.size() ) {// list¤£¬°ªÅ´N¶ë¶i¨Ó 
+				if ( JobItem < Job_list.size() ) {// listä¸ç‚ºç©ºå°±å¡é€²ä¾† 
 					while ( Job_list[JobItem].Arrival == CPU_time ) {
 						cpu.Joblist_to_CPU() ;
 						JobItem ++ ;
-						if ( cpu.Q_Jobs.size() > 4 ) { //¶W¹L±Æ¶¤¤H¼Æ
+						if ( cpu.Q_Jobs.size() > 4 ) { //è¶…éæ’éšŠäººæ•¸
 							cpu.Q_fullOut() ;
 						} // if
 					} // while
 				} // if
 				
-				if ( !cpu.Q_Jobs.empty() && cpu.Q_Jobs[0].CPU_doing_time == 0 ) { // setting the Job Doing Time  ª`·N¦î¦C¬°ªÅ 
+				if ( !cpu.Q_Jobs.empty() && cpu.Q_Jobs[0].CPU_doing_time == 0 ) { // setting the Job Doing Time  æ³¨æ„ä½‡åˆ—ç‚ºç©º 
 					cpu.Q_Jobs[0].CPU_doing_time = CPU_time ;
 				} // if
 				 
