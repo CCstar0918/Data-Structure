@@ -1,4 +1,4 @@
-// 10727127 ªô¨ÎÂ@ 10727157 ¤òµbÜr 
+// 10727127 é‚±ä½³é§¿ 10727157 æ¯›ç¨éˆœ 
 # include <cstdio>
 # include <cstring>
 # include <math.h>
@@ -11,7 +11,7 @@ using namespace std ;
 string trash ;
 vector< string > temp ;
 
-class Expression { // «Å§i¤@­Ó pointer 
+class Expression { // å®£å‘Šä¸€å€‹ pointer 
   public :
 	string Str ;
     Expression* next ;
@@ -51,7 +51,7 @@ class MyStack {
 		} // if
   
 		else if ( h == NULL )
-	    	return "¦³°İÃD" ;
+	    	return "æœ‰å•é¡Œ" ;
 	      
 	} // pop()
  
@@ -79,9 +79,9 @@ class Input {
  	char input ;
   
  	void PrintCommand() {
-    	cout << endl << "*" << " 0. Â÷¶}" << endl << "*" <<
-     	" 1. ¤¤§Ç¦¡¹Bºâ¦¡ÀË´ú" << endl << "*" << " 2. ¤¤§Ç¦¡Âà«á§Ç¦¡" << endl <<
-     	"½Ğ¿é¤J«ü¥O( 0, 1, 2 ):" ; 
+    	cout << endl << "*" << " 0. é›¢é–‹" << endl << "*" <<
+     	" 1. ä¸­åºå¼é‹ç®—å¼æª¢æ¸¬" << endl << "*" << " 2. ä¸­åºå¼è½‰å¾Œåºå¼" << endl <<
+     	"è«‹è¼¸å…¥æŒ‡ä»¤( 0, 1, 2 ):" ; 
     } // PrintCommand
 
  	bool isStringDigit( string str ) {
@@ -103,14 +103,14 @@ class Input {
       	return str ; 
     } // Read()
  
- 	string gettoken() { // §â¨C­Ótoken©ñ¤J¦P¤@­Óstring ¥ÎªÅ¥Õ¤À¶} 
+ 	string gettoken() { // æŠŠæ¯å€‹tokenæ”¾å…¥åŒä¸€å€‹string ç”¨ç©ºç™½åˆ†é–‹ 
 
 		int i = 0 ;
 	   	string read = Read() ;
 	   	string str = "" ;
 	   	bool num = false ;
     	while ( i < read.length() ){
-     		if ( read[i] <= '9' && read[i] >= '0' ) { // ³B²z¼Æ¦r 
+     		if ( read[i] <= '9' && read[i] >= '0' ) { // è™•ç†æ•¸å­— 
        			num = true ;
        			str = str + read[i] ;
   			} // if
@@ -139,14 +139,14 @@ class Input {
         	return true ;
     } // IsOperator()
     
-    int inorderTest( string str ) { // §PÂ_¬O§_¬°¦X®æªº¤¤§Ç 
+    int inorderTest( string str ) { // åˆ¤æ–·æ˜¯å¦ç‚ºåˆæ ¼çš„ä¸­åº 
 		int count = 0 ;
 		string connect = "" ;
-		// ±Ntoken±qstring¤À¶} ©ñ¤Jvector¸Ì 
+		// å°‡tokenå¾stringåˆ†é–‹ æ”¾å…¥vectorè£¡ 
 		for ( int i = 0 ; i < str.length() ; i++ ) {
         	if ( str[i] != ' ' ) {
          		connect += str[i] ;
-         		if ( i + 1 == str.length() ) // ³Ì«á¤@®æµL±ø¥ó±À¤J 
+         		if ( i + 1 == str.length() ) // æœ€å¾Œä¸€æ ¼ç„¡æ¢ä»¶æ¨å…¥ 
            			temp.push_back( connect ) ;      
         	} // if
         
@@ -159,13 +159,13 @@ class Input {
    		
       	for ( int j = 0 ; j < temp.size() ; j++ ) {
       		
-      		// §ä¿ù»~²Å¸¹ 
+      		// æ‰¾éŒ¯èª¤ç¬¦è™Ÿ 
         	if ( !isStringDigit( temp[j] ) && temp[j] != "+" &&
             	temp[j] != "-" && temp[j] != "*" && temp[j] != "/" &&
             	temp[j] != "(" && temp[j] != ")" ) {
           
           		trash = temp[j] ;
-         		return 1 ;  // ²Å¸¹¿ù»~ 
+         		return 1 ;  // ç¬¦è™ŸéŒ¯èª¤ 
         	} // if
         
         	if ( temp[j] == "(" )
@@ -173,18 +173,18 @@ class Input {
        		if ( temp[j] == ")")
          		count -- ;
         	if ( count < 0 )
-         		return 21 ;   // ¥k¬A¸¹¤Ó¦h 
-       		if ( j+1 < temp.size() && temp[j] == "(" && temp[j+1] == ")" ) // ¦h¤@²Õ¬A¸¹ 
+         		return 21 ;   // å³æ‹¬è™Ÿå¤ªå¤š 
+       		if ( j+1 < temp.size() && temp[j] == "(" && temp[j+1] == ")" ) // å¤šä¸€çµ„æ‹¬è™Ÿ 
          		return 212 ;
        		if ( j > 0 &&  (( temp[j] == "(" && isStringDigit( temp[j-1] ) ) ||
           	( j+1 < temp.size() && temp[j] == ")" && isStringDigit( temp[j+1] ) )   )  )
-         		return 32 ;    // ¹Bºâ¼Æ¤Ó¦h
+         		return 32 ;    // é‹ç®—æ•¸å¤ªå¤š
      		if ( j+1 < temp.size() && IsOperator( temp[j]) && IsOperator( temp[j+1]) )
-    			return 31 ;   // ¹Bºâ¤l¤Ó¦h 
+    			return 31 ;   // é‹ç®—å­å¤ªå¤š 
    		} // for
    
    		if ( count > 0 )
-     		return 22 ;   // ¥ª¬A¸¹¤Ó¦h  
+     		return 22 ;   // å·¦æ‹¬è™Ÿå¤ªå¤š  
       	if ( temp.size() != 0 && IsOperator(temp[temp.size()-1] ))
      		return 31 ;
 
@@ -218,16 +218,16 @@ int main() {
   string com ;
   char ch = '\0' ;
   char stemp[256] ;
-  int back = -1 ; // ¦s¹Bºâ¦¡¬°¥¿½T©Î¿ù»~°T®§«ü¥O 
+  int back = -1 ; // å­˜é‹ç®—å¼ç‚ºæ­£ç¢ºæˆ–éŒ¯èª¤è¨Šæ¯æŒ‡ä»¤ 
   Expression *postfix = NULL ;
   Input v ;
   MyStack stack ;
   while ( 1 ) {
 	v.PrintCommand() ;
-	scanf( "%s%c", stemp, &ch ) ; // Åª¨ú«ü¥O¤Î'\n' 
+	scanf( "%s%c", stemp, &ch ) ; // è®€å–æŒ‡ä»¤åŠ'\n' 
 	com = string(stemp) ;
-   	while ( !v.isStringDigit( com ) || atoi( com.c_str() ) < 0 || atoi( com.c_str() ) > 2 ) { // ±Æ±¼©_©Ç¼Æ¦r 
-    	cout << "«ü¥O¤£¦s¦b,½Ğ­«·s¿é¤J" << endl ;
+   	while ( !v.isStringDigit( com ) || atoi( com.c_str() ) < 0 || atoi( com.c_str() ) > 2 ) { // æ’æ‰å¥‡æ€ªæ•¸å­— 
+    	cout << "æŒ‡ä»¤ä¸å­˜åœ¨,è«‹é‡æ–°è¼¸å…¥" << endl ;
 		cout << endl ; 
 		v.PrintCommand() ;
 		scanf( "%s%c", stemp, &ch ) ;
@@ -281,16 +281,16 @@ int main() {
       	if ( back == 32 )
        		cout << endl << "Error 3: there is one extra operand." ;
        		
-       	// ¨S¦³¿ù»~´NÂà´«¬°«á§Ç 
+       	// æ²’æœ‰éŒ¯èª¤å°±è½‰æ›ç‚ºå¾Œåº 
       	else { 
        		cout << "Postfix expression: " ;
        		for ( int i = 0 ; i < temp.size() ; i++ ) {
-         		if ( v.isStringDigit( temp[i] ) ) // ¼Æ¦rª½±µ©ñ¤Jpostfix 
+         		if ( v.isStringDigit( temp[i] ) ) // æ•¸å­—ç›´æ¥æ”¾å…¥postfix 
             		Add( postfix, temp[i] ) ;
-         		else if ( temp[i] == "(" ) // ¥ª¬A¸¹©ñ¤Jstack 
+         		else if ( temp[i] == "(" ) // å·¦æ‹¬è™Ÿæ”¾å…¥stack 
            			stack.push( temp[i] ) ;
          		else if ( v.IsOperator( temp[i] ) ) {
-         			//  ³B²z²Å¸¹ª¬ªp¡G¤ñ¸û²Å¸¹Àu¥ı«×¡A¦pªGstack¤¤ªºÀu¥ı«× >= Åª¶i¨Óªº²Å¸¹Àu¥ı«×¡A±Nstack³Ì¤W¼h©ñ¤Jpostfix¡A¦b±NÅª¶i¨Óªº²Å¸¹©ñ¤Jstack 
+         			//  è™•ç†ç¬¦è™Ÿç‹€æ³ï¼šæ¯”è¼ƒç¬¦è™Ÿå„ªå…ˆåº¦ï¼Œå¦‚æœstackä¸­çš„å„ªå…ˆåº¦ >= è®€é€²ä¾†çš„ç¬¦è™Ÿå„ªå…ˆåº¦ï¼Œå°‡stackæœ€ä¸Šå±¤æ”¾å…¥postfixï¼Œåœ¨å°‡è®€é€²ä¾†çš„ç¬¦è™Ÿæ”¾å…¥stack 
            			while ( stack.getTop() == "*" || stack.getTop() == "/" || 
            				( ( stack.getTop() == "+" || stack.getTop() == "-" )
       					&& ( temp[i] == "+" || temp[i] == "-" ) ) )
@@ -298,11 +298,11 @@ int main() {
            			stack.push( temp[i] ) ;
           		} // else if
              	
-             	// ³B²z¬A¸¹ª¬ªp¡G¤@¹J¨ì¥k¬A¸¹´N§â³Ìªñªº¥ª¬A¸¹¥H¤ºªº©Ò¦³operator©ñ¤Jpostfix 
+             	// è™•ç†æ‹¬è™Ÿç‹€æ³ï¼šä¸€é‡åˆ°å³æ‹¬è™Ÿå°±æŠŠæœ€è¿‘çš„å·¦æ‹¬è™Ÿä»¥å…§çš„æ‰€æœ‰operatoræ”¾å…¥postfix 
          		else if ( temp[i] == ")" ) {
            			while ( stack.getTop() != "(") 
              			Add( postfix, stack.pop() ) ;
-           			stack.pop() ; // §R°£¥ª¬A¸¹ 
+           			stack.pop() ; // åˆªé™¤å·¦æ‹¬è™Ÿ 
           		} // else if
           
         	} // for
@@ -311,14 +311,14 @@ int main() {
            		Add( postfix, stack.pop() ) ;        
    		} // else
    
-   		// ¿é¥X«á§Ç 
+   		// è¼¸å‡ºå¾Œåº 
 	  	for ( Expression *t = postfix ; t != NULL ; t = t->next ) {
 			cout << ( myFirst ? "" : ", " ) << t->Str ;
      		myFirst = false ;
    	  	} // for  
     } // else if  
     
-    // ÂkÁÙªÅ¶¡ 
+    // æ­¸é‚„ç©ºé–“ 
     Delete( postfix ) ;
     stack.clear() ;
    	temp.clear() ;
